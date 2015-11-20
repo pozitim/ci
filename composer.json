@@ -1,0 +1,22 @@
+{
+  "name": "pozitim/ci",
+  "type": "library",
+  "require": {
+    "php": ">=5.5.0",
+    "omerucel/di": "dev-master",
+    "zendframework/zend-config": "2.*",
+    "monolog/monolog": "1.*",
+    "symfony/console": "2.*",
+    "symfony/yaml": "2.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "phpunit/php-code-coverage": "2.*",
+    "squizlabs/php_codesniffer": "2.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Pozitim": "src/"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+suites:
+  default:
+    env:
+      APPLICATION_ENV: pozitim-ci
+    services:
+      mysql:
+        database: charging
+        username: root
+        password:
+        charset: utf8
+      memcached:
+      gearmand:
+      nginx:
+        public: /project/public
+      php-fpm:
+    php-extensions:
+      - php-opcache
+      - php-xml
+    php-versions:
+      - 5.4
+    scripts:
+      - sh /project/tests/pozitim-ci-files/install.sh
+  phalcon2:
+    extend: default
+    php-versions:
+      - 5.5
+      - 5.6
+    scripts:
+      - sh /project/tests/pozitim-ci-files/install2.sh
