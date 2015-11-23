@@ -2,7 +2,9 @@
 
 namespace Pozitim\CI\Config\Exception;
 
-class CouldNotParseException extends \Exception
+use Pozitim\CI\Exception\ExceptionAbstract;
+
+class CouldNotParseException extends ExceptionAbstract
 {
 
 }

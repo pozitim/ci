@@ -11,6 +11,7 @@ class ConfigFacadeTest extends \PHPUnit_Framework_TestCase
         $expected = [
             'suites' => [
                 'default' => [
+                    'os' => 'centos',
                     'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
                     'services' => [
                         'mysql' => [
@@ -31,6 +32,7 @@ class ConfigFacadeTest extends \PHPUnit_Framework_TestCase
                     'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
                 ],
                 'phalcon2' => [
+                    'os' => 'centos',
                     'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
                     'services' => [
                         'mysql' => [
