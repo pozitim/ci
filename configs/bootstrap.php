@@ -6,6 +6,7 @@ $environment = !isset($environment) ? 'development' : $environment;
 ini_set('error_log', realpath(__DIR__ . '/../log/') . '/php_error.log');
 
 $di = new \OU\DI();
+$di->setShared('class_loader', $loader);
 
 $di->setShared('config', function () use ($environment) {
     $filePath = realpath(__DIR__ . '/env/' . $environment . '.php');
