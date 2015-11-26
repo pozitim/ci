@@ -13,9 +13,7 @@ class ConfigFacade
     public function parseFromFile($filePath)
     {
         $configs = (array) Yaml::parse(file_get_contents($filePath));
-        $parser = new CompositeParser();
-        $parser->addParser(new SuiteParser());
-        $parser->addParser(new OsParser());
+        $parser = new ConfigParser();
         return $parser->parse($configs);
     }
 }

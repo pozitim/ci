@@ -10,47 +10,44 @@ class ConfigFacadeTest extends \PHPUnit_Framework_TestCase
         $configs = $facade->parseFromFile(realpath(__DIR__) . '/sample.pozitim-ci.yml');
         $expected = [
             'suites' => [
-                'default' => [
-                    'os' => 'centos',
+                'php54' => [
+                    'image' => 'centos-php54',
                     'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
                     'services' => [
                         'mysql' => [
-                            'database' => 'charging',
-                            'username' => 'root',
-                            'password' => '',
-                            'charset' => 'utf8'
-                        ],
-                        'nginx' => [
-                            'public' => '/project/public'
+                            'database' => 'project'
                         ],
                         'memcached' => null,
                         'gearmand' => null,
-                        'php-fpm' => null
+                        'web' => null
                     ],
-                    'php-extensions' => ['php-opcache', 'php-xml'],
-                    'php-versions' => ['5.4'],
                     'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
                 ],
-                'phalcon2' => [
-                    'os' => 'centos',
+                'php55' => [
+                    'image' => 'centos-php55',
                     'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
                     'services' => [
                         'mysql' => [
-                            'database' => 'charging',
-                            'username' => 'root',
-                            'password' => '',
-                            'charset' => 'utf8'
-                        ],
-                        'nginx' => [
-                            'public' => '/project/public'
+                            'database' => 'project'
                         ],
                         'memcached' => null,
                         'gearmand' => null,
-                        'php-fpm' => null
+                        'web' => null
                     ],
-                    'php-extensions' => ['php-opcache', 'php-xml'],
-                    'php-versions' => ['5.5', '5.6'],
-                    'scripts' => ['sh /project/tests/pozitim-ci-files/install2.sh']
+                    'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
+                ],
+                'php56' => [
+                    'image' => 'centos-php56',
+                    'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
+                    'services' => [
+                        'mysql' => [
+                            'database' => 'project'
+                        ],
+                        'memcached' => null,
+                        'gearmand' => null,
+                        'web' => null
+                    ],
+                    'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
                 ]
             ]
         ];

@@ -4,7 +4,7 @@ namespace Pozitim\CI\Config;
 
 use Pozitim\CI\Config\Exception\CouldNotParseException;
 
-class SuiteParser implements Parser
+class ConfigParser
 {
     /**
      * @param array $configs

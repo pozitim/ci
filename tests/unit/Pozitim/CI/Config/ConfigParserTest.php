@@ -2,12 +2,12 @@
 
 namespace Pozitim\CI\Config;
 
-class SuiteParserTest extends \PHPUnit_Framework_TestCase
+class ConfigParserTest extends \PHPUnit_Framework_TestCase
 {
     public function testSuitesKeyNotFound()
     {
         $configs = [];
-        $parser = new SuiteParser();
+        $parser = new ConfigParser();
         $this->setExpectedException('Pozitim\CI\Config\Exception\CouldNotParseException');
         $parser->parse($configs);
     }
@@ -34,7 +34,7 @@ class SuiteParserTest extends \PHPUnit_Framework_TestCase
                 ]
             ]
         ];
-        $parser = new SuiteParser();
+        $parser = new ConfigParser();
         $suite2 = $parser->parse($configs);
         $expected = [
             'suites' => [
