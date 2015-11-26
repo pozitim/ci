@@ -1,0 +1,4 @@
+[ ] php5.3 ve php7 için docker imajları eklenmeli.
+[ ] MySQL servisi için kullanıcı adı ve şifre ayarlanabilmeli.
+[ ] Web servisi için apache de kullanılabilmeli.
+[ ] Servisler için (nginx, php-fpm, mysql vb.) özel ayar dosyaları eklenebilmeli.
