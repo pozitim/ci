@@ -7,7 +7,8 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
     public function testSuitesKeyNotFound()
     {
         $configs = [];
-        $parser = new ConfigParser();
+        $filesystemHelper = $this->getMock('Pozitim\CI\Filesystem\Adapter');
+        $parser = new ConfigParser($filesystemHelper);
         $this->setExpectedException('Pozitim\CI\Config\Exception\CouldNotParseException');
         $parser->parse($configs);
     }
@@ -34,7 +35,8 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
                 ]
             ]
         ];
-        $parser = new ConfigParser();
+        $filesystemHelper = $this->getMock('Pozitim\CI\Filesystem\Adapter');
+        $parser = new ConfigParser($filesystemHelper);
         $suite2 = $parser->parse($configs);
         $expected = [
             'suites' => [
@@ -64,5 +66,56 @@ class ConfigParserTest extends \PHPUnit_Framework_TestCase
             ]
         ];
         $this->assertEquals($expected, $suite2);
+    }
+
+    public function testParseFromFile()
+    {
+        $filesystemHelper = $this->getMockForAbstractClass('Pozitim\CI\Filesystem\Adapter\AdapterAbstract');
+        $parser = new ConfigParser($filesystemHelper);
+        $configs = $parser->parseFromFile(realpath(__DIR__) . '/sample.pozitim-ci.yml');
+        $expected = [
+            'suites' => [
+                'php54' => [
+                    'image' => 'centos-php54',
+                    'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
+                    'services' => [
+                        'mysql' => [
+                            'database' => 'project'
+                        ],
+                        'memcached' => null,
+                        'gearmand' => null,
+                        'web' => null
+                    ],
+                    'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
+                ],
+                'php55' => [
+                    'image' => 'centos-php55',
+                    'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
+                    'services' => [
+                        'mysql' => [
+                            'database' => 'project'
+                        ],
+                        'memcached' => null,
+                        'gearmand' => null,
+                        'web' => null
+                    ],
+                    'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
+                ],
+                'php56' => [
+                    'image' => 'centos-php56',
+                    'env' => ['APPLICATION_ENV' => 'pozitim-ci'],
+                    'services' => [
+                        'mysql' => [
+                            'database' => 'project'
+                        ],
+                        'memcached' => null,
+                        'gearmand' => null,
+                        'web' => null
+                    ],
+                    'scripts' => ['sh /project/tests/pozitim-ci-files/install.sh']
+                ]
+            ]
+        ];
+        $this->assertEquals($expected, $configs);
     }
 }

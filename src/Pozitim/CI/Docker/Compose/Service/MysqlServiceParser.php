@@ -2,7 +2,7 @@
 
 namespace Pozitim\CI\Docker\Compose\Service;
 
-class MySQLServiceParser implements ServiceParser
+class MysqlServiceParser implements ServiceParser
 {
     /**
      * @param array $suiteConfigs

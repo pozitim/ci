@@ -3,9 +3,33 @@
 namespace Pozitim\CI\Config;
 
 use Pozitim\CI\Config\Exception\CouldNotParseException;
+use Pozitim\CI\Filesystem\Adapter;
 
 class ConfigParser
 {
+    /**
+     * @var Adapter
+     */
+    protected $filesystemHelper;
+
+    /**
+     * @param Adapter $filesystemHelper
+     */
+    public function __construct(Adapter $filesystemHelper)
+    {
+        $this->filesystemHelper = $filesystemHelper;
+    }
+
+    /**
+     * @param $filePath
+     * @return array
+     * @throws CouldNotParseException
+     */
+    public function parseFromFile($filePath)
+    {
+        return $this->parse($this->filesystemHelper->getYamlFileContent($filePath));
+    }
+
     /**
      * @param array $configs
      * @return array

@@ -2,11 +2,11 @@
 
 namespace Pozitim\CI\Docker\Compose\Service;
 
-class MySQLServiceParserTest extends \PHPUnit_Framework_TestCase
+class MysqlServiceParserTest extends \PHPUnit_Framework_TestCase
 {
     public function testParse()
     {
-        $parser = new MySQLServiceParser();
+        $parser = new MysqlServiceParser();
         $expected = [
             'image' => 'mysql',
             'environment' => [

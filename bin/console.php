@@ -21,4 +21,5 @@ $di->get('error_catcher')->setExceptionCallback(function (\Exception $exception)
 
 $symfonyConsoleApp = new \Symfony\Component\Console\Application();
 $symfonyConsoleApp->getHelperSet()->set(new \Pozitim\Console\DiHelper($di));
+$symfonyConsoleApp->add(new \Pozitim\CI\Console\ComposeRunnerCommand());
 $symfonyConsoleApp->run();
