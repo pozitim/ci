@@ -2,15 +2,12 @@
 
 namespace Pozitim\CI\Console;
 
-use Pozitim\CI\Docker\Compose\ComposeFacade;
-use Pozitim\CI\Docker\Compose\ComposeRunner;
-use Pozitim\CI\Exec\Result;
+use Pozitim\CI\Docker\ComposeRunner;
 use Pozitim\Console\DiHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Zend\Config\Config;
 
 class ComposeRunnerCommand extends Command
 {
@@ -22,19 +19,20 @@ class ComposeRunnerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $projectFilePath = $input->getOption('project-file');
+        $composeRunner = new ComposeRunner($this->getDi());
+        $composeRunner->run($projectFilePath);
+    }
+
+    /**
+     * @return \OU\DI
+     */
+    protected function getDi()
+    {
         /**
          * @var DiHelper $diHelper
-         * @var Config $sysConfig
-         * @var ComposeRunner $dockerComposeRunner
-         * @var Result $result
          */
         $diHelper = $this->getHelper('di');
-        $projectFolder = $input->getOption('project-file');
-        $dockerComposeRunner = $diHelper->getDi()->get('docker_compose_runner');
-        $results = $dockerComposeRunner->run($projectFolder);
-        foreach ($results as $suiteName => $result) {
-            $output->writeln('Suite: ' . $suiteName . ' ExitCode: ' . $result->getExitCode());
-            $output->writeln($result->getOutput());
-        }
+        return $diHelper->getDi();
     }
 }

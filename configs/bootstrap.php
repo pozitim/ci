@@ -23,28 +23,39 @@ $di->setShared('error_catcher', function () {
     return new \Pozitim\ErrorCatcher();
 });
 
-$di->setShared('filesystem_helper', function (\OU\DI $di) {
-    $execHelper = $di->get('exec_helper');
-    $adapter = new \Pozitim\CI\Filesystem\Adapter\ExecAdapter($execHelper);
-    return new \Pozitim\CI\Filesystem\Helper($adapter);
+$di->setShared('pdo', function (\OU\DI $di) {
+    $config = $di->get('config');
+    try {
+        $pdo = new \PDO($config->pdo->dsn, $config->pdo->username, $config->pdo->password);
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    } catch (\PDOException $exception) {
+        /**
+         * @var \Monolog\Logger $logger
+         */
+        $logger = $di->get('logger_helper')->getLogger();
+        $logger->critical($exception);
+        throw $exception;
+    }
+    return $pdo;
 });
 
-$di->setShared('exec_helper', function (\OU\DI $di) {
-    $logger = $di->get('logger_helper')->getLogger();
-    $adapter = new \Pozitim\CI\Exec\Adapter\LocalAdapter();
-    return new \Pozitim\CI\Exec\Helper($adapter, $logger);
+$di->setShared('pdo_helper', function (\OU\DI $di) {
+    $profiler = new \Pozitim\MySQL\SQLProfiler($di);
+    $helper = new \Pozitim\MySQL\PDOHelper($di);
+    $helper->setProfiler($profiler);
+    return $helper;
 });
 
-$di->setShared('config_parser', function (\OU\DI $di) {
-    return new \Pozitim\CI\Config\ConfigParser($di->get('filesystem_helper'));
+$di->setShared('build_entity_saver', function (\OU\DI $di) {
+    return new \Pozitim\CI\Database\MySQL\BuildEntitySaverImpl($di);
 });
 
-$di->setShared('docker_compose_runner', function (\OU\DI $di) {
-    return new \Pozitim\CI\Docker\Compose\ComposeRunner($di);
+$di->setShared('job_entity_saver', function (\OU\DI $di) {
+    return new \Pozitim\CI\Database\MySQL\JobEntitySaverImpl($di);
 });
 
-$di->setShared('docker_compose_settings_generator', function (\OU\DI $di) {
-    return new \Pozitim\CI\Docker\Compose\ComposeSettingsGenerator($di);
+$di->setShared('temporary_folder_setup_helper', function (\OU\DI $di) {
+    return new \Pozitim\CI\Docker\Compose\TemporaryFolderSetupHelper($di->get('config')->tmp_path);
 });
 
 return $di;

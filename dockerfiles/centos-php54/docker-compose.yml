@@ -1,4 +1,4 @@
-web:
+centos_php54_default:
   image: pozitim-ci/centos-php54
   environment:
     APPLICATION_ENV: pozitim-ci
@@ -6,20 +6,24 @@ web:
     NGINX_INDEX_FILE: index.php
   command: sh /init.sh
   ports:
-    - "80:80"
+    - 80
   links:
-    - mysql:mysql
-    - memcached:memcached
+    - centos_php54_mysql
+    - centos_php54_memcached
   volumes:
     - ./init.sh:/init.sh
     - ./source-code:/project
 
-mysql:
+centos_php54_mysql:
   image: mysql
+  ports:
+    - 3306
   environment:
     MYSQL_DATABASE: "database"
     MYSQL_ROOT_PASSWORD: ""
     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
-memcached:
+centos_php54_memcached:
   image: memcached
+  ports:
+    - 11211

@@ -8,3 +8,4 @@ docker pull pataquest/gearmand
 docker build -t pozitim-ci/centos-php54 centos-php54/
 docker build -t pozitim-ci/centos-php55 centos-php55/
 docker build -t pozitim-ci/centos-php56 centos-php56/
+docker build -t pozitim-ci/centos-php57 centos-php57/
