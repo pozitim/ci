@@ -1,0 +1,29 @@
+centos_php53_default:
+  image: pozitim-ci/centos-php53
+  environment:
+    APPLICATION_ENV: pozitim-ci
+    NGINX_PUBLIC_FOLDER: /project/public
+    NGINX_INDEX_FILE: index.php
+  command: sh /init.sh
+  ports:
+    - 80
+  links:
+    - centos_php53_mysql
+    - centos_php53_memcached
+  volumes:
+    - ./init.sh:/init.sh
+    - ./source-code:/project
+
+centos_php53_mysql:
+  image: mysql
+  ports:
+    - 3306
+  environment:
+    MYSQL_DATABASE: "database"
+    MYSQL_ROOT_PASSWORD: ""
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+centos_php53_memcached:
+  image: memcached
+  ports:
+    - 11211
