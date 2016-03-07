@@ -6,7 +6,7 @@ if (!$environment) {
     exit(255);
 }
 
-$di = require_once(realpath(__DIR__ . '/../') . '/configs/bootstrap.php');
+$di = include(realpath(__DIR__ . '/../') . '/configs/bootstrap.php');
 $di->get('config')->logger->default_name = 'console';
 $di->get('error_catcher')->register();
 $di->get('error_catcher')->setFatalCallback(function ($message) use ($di) {

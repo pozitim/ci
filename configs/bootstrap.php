@@ -54,8 +54,31 @@ $di->setShared('job_entity_saver', function (\OU\DI $di) {
     return new \Pozitim\CI\Database\MySQL\JobEntitySaverImpl($di);
 });
 
+$di->setShared('job_entity_fetcher', function (\OU\DI $di) {
+    return new \Pozitim\CI\Database\MySQL\JobEntityFetcherImpl($di);
+});
+
 $di->setShared('temporary_folder_setup_helper', function (\OU\DI $di) {
     return new \Pozitim\CI\Docker\Compose\TemporaryFolderSetupHelper($di->get('config')->tmp_path);
+});
+
+$di->setShared('http_request', function ($di) {
+    return \Symfony\Component\HttpFoundation\Request::createFromGlobals();
+});
+
+$di->setShared('http_response', function ($di) {
+    return new \Symfony\Component\HttpFoundation\Response();
+});
+
+$di->setShared('router', function (\OU\DI $di) {
+    $router = new AltoRouter();
+    $router->map('GET', '/raw-job-viewer', '\Pozitim\CI\Web\V1\RawJobViewerController#view');
+    $router->map('POST|GET|PUT|DELETE', '*', '\Pozitim\CI\Web\V1\NotFoundController#notFound');
+    return $router;
+});
+
+$di->setShared('dispatcher', function (\OU\DI $di) {
+    return new \Pozitim\CI\Web\Dispatcher($di);
 });
 
 return $di;
