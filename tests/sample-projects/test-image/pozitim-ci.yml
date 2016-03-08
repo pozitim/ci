@@ -1,0 +1,14 @@
+suite1:
+  image: pozitim-ci/centos-php54
+  environments:
+    APPLICATION_ENV: pozitim-ci
+  commands:
+    - php -v
+
+suite2:
+  extend: suite1
+  image: pozitim-ci/centos-php55
+
+suite3:
+  extend: suite2
+  image: pozitim-ci/centos-php56

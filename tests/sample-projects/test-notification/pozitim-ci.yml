@@ -1,0 +1,17 @@
+suite1:
+  image: pozitim-ci/centos-php56
+  environments:
+    APPLICATION_ENV: pozitim-ci
+    PHALCON_VERSION: 1.3.4
+  commands:
+    - "php -r \"echo Phalcon\\Version::getId();\""
+  notifications:
+    hipchat:
+      room_name: Auth
+
+suite2:
+  extend: suite1
+  image: pozitim-ci/centos-php56
+  environments:
+    APPLICATION_ENV: pozitim-ci
+    PHALCON_VERSION: 2.0.0

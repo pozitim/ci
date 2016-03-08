@@ -1,0 +1,7 @@
+- [X] php5.3 ve php7 için docker imajları eklenmeli.
+- [ ] MySQL servisi için kullanıcı adı ve şifre ayarlanabilmeli.
+- [ ] Web servisi için apache de kullanılabilmeli.
+- [ ] Servisler için (nginx, php-fpm, mysql vb.) özel ayar dosyaları eklenebilmeli.
+- [X] Özel docker imajlarının kullanılması için image ayarının herhangi bir filtreye takılmaması lazım.
+- [ ] scripts ayarı scripts ve install_scripts olarak ikiye ayrılmalı. Bunların logları ayrı yerlerde saklanmalı.(?)
+- [X] Farklı sürümlerdeki Phalcon eklentileri hazır imajlarda bulunmalı.

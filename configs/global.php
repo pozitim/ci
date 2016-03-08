@@ -15,7 +15,9 @@ $configs = array(
     'tmp_path' => BASE_PATH . '/tmp',
     'req_id' => uniqid('REQ-' . gethostname()),
     'php_bin' => '/usr/bin/php',
-    'docker_path' => '/usr/local/bin/docker'
+    'docker_bin' => '/usr/local/bin/docker',
+    'docker_compose_bin' => '/usr/local/bin/docker-compose',
+    'host_url' => 'http://192.168.99.100'
 );
 
 /**
