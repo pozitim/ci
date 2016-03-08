@@ -1,5 +1,5 @@
-centos_php7_default:
-  image: pozitim-ci/centos-php7
+default:
+  image: pozitim-ci/centos-php70
   environment:
     APPLICATION_ENV: pozitim-ci
     NGINX_PUBLIC_FOLDER: /project/public
@@ -8,13 +8,13 @@ centos_php7_default:
   ports:
     - 80
   links:
-    - centos_php7_mysql
-    - centos_php7_memcached
+    - mysql
+    - memcached
   volumes:
     - ./init.sh:/init.sh
     - ./source-code:/project
 
-centos_php7_mysql:
+mysql:
   image: mysql
   ports:
     - 3306
@@ -23,7 +23,7 @@ centos_php7_mysql:
     MYSQL_ROOT_PASSWORD: ""
     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
-centos_php7_memcached:
+memcached:
   image: memcached
   ports:
     - 11211

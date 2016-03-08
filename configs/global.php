@@ -44,4 +44,10 @@ $configs['logger']['default_level'] = \Monolog\Logger::DEBUG;
  * $di->getLogger('app')->info('foo bar');
  */
 
+/**
+ * HipChat
+ */
+$configs['hipchat'] = array();
+$configs['hipchat']['access_token'] = '';
+
 return $configs;

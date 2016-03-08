@@ -1,4 +1,4 @@
-centos_php53_default:
+default:
   image: pozitim-ci/centos-php53
   environment:
     APPLICATION_ENV: pozitim-ci
@@ -8,13 +8,13 @@ centos_php53_default:
   ports:
     - 80
   links:
-    - centos_php53_mysql
-    - centos_php53_memcached
+    - mysql
+    - memcached
   volumes:
     - ./init.sh:/init.sh
     - ./source-code:/project
 
-centos_php53_mysql:
+mysql:
   image: mysql
   ports:
     - 3306
@@ -23,7 +23,7 @@ centos_php53_mysql:
     MYSQL_ROOT_PASSWORD: ""
     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
-centos_php53_memcached:
+memcached:
   image: memcached
   ports:
     - 11211

@@ -2,6 +2,6 @@
 - [ ] MySQL servisi için kullanıcı adı ve şifre ayarlanabilmeli.
 - [ ] Web servisi için apache de kullanılabilmeli.
 - [ ] Servisler için (nginx, php-fpm, mysql vb.) özel ayar dosyaları eklenebilmeli.
-- [ ] Özel docker imajlarının kullanılması için image ayarının herhangi bir filtreye takılmaması lazım.
+- [X] Özel docker imajlarının kullanılması için image ayarının herhangi bir filtreye takılmaması lazım.
 - [ ] scripts ayarı scripts ve install_scripts olarak ikiye ayrılmalı. Bunların logları ayrı yerlerde saklanmalı.(?)
-- [ ] Farklı sürümlerdeki Phalcon eklentileri hazır imajlarda bulunmalı.
+- [X] Farklı sürümlerdeki Phalcon eklentileri hazır imajlarda bulunmalı.
