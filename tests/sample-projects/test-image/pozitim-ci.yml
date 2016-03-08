@@ -2,6 +2,12 @@ suite1:
   image: pozitim-ci/centos-php54
   environments:
     APPLICATION_ENV: pozitim-ci
+  services:
+    gearmand:
+    mongo:
+    redis:
+    mysql:
+      database: test
   commands:
     - php -v
 

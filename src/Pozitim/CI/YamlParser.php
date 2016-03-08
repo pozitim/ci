@@ -31,6 +31,12 @@ class YamlParser
     {
         if (isset($this->suites[$suiteName]['services']) == false) {
             $this->suites[$suiteName]['services'] = array();
+        } else {
+            foreach ($this->suites[$suiteName]['services'] as $serviceName => $serviceConfigs) {
+                if (is_array($serviceConfigs) == false) {
+                    $this->suites[$suiteName]['services'][$serviceName] = array();
+                }
+            }
         }
         if (isset($this->suites[$suiteName]['services']['default']) == false) {
             $this->suites[$suiteName]['services']['default'] = array();
