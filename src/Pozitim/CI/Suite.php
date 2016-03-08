@@ -56,6 +56,11 @@ class Suite
     protected $services = array();
 
     /**
+     * @var array
+     */
+    protected $notificationSettings = array();
+
+    /**
      * @param array $extendedConfig
      */
     public function setSuiteConfigs(array $extendedConfig)
@@ -68,6 +73,9 @@ class Suite
         }
         if (isset($extendedConfig['commands'])) {
             $this->setCommands($extendedConfig['commands']);
+        }
+        if (isset($extendedConfig['notifications'])) {
+            $this->setNotificationSettings($extendedConfig['notifications']);
         }
         $this->setServices($extendedConfig['services']);
         $this->setTemporaryFolder();
@@ -197,6 +205,22 @@ class Suite
     public function getServiceNames()
     {
         return array_keys($this->services);
+    }
+
+    /**
+     * @return array
+     */
+    public function getNotificationSettings()
+    {
+        return $this->notificationSettings;
+    }
+
+    /**
+     * @param array $notifications
+     */
+    public function setNotificationSettings(array $notificationSettings)
+    {
+        $this->notificationSettings = $notificationSettings;
     }
 
     /**

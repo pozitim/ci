@@ -2,7 +2,7 @@
 
 namespace Pozitim\CI\Database;
 
-interface NotificationEntityFetcher
+interface NotificationTypeEntityFetcher
 {
     /**
      * @return array

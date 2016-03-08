@@ -6,6 +6,7 @@ use Monolog\Logger;
 use OU\DI;
 use Pozitim\CI\Database\Entity\JobEntity;
 use Pozitim\CI\Database\JobEntitySaver;
+use Pozitim\CI\Notification\NotificationSender;
 use Pozitim\CI\Suite;
 use Pozitim\Process;
 use Zend\Config\Config;
@@ -42,6 +43,9 @@ class SuiteRunner
             $this->handleProcessOutput($stdout, $stderr);
         });
         $this->handleComplete($process->getExitCode());
+        if (empty($this->getCurrentSuite()->getNotificationSettings()) == false) {
+            $this->getNotificationSender()->sendJobCompletedNotification($this->getCurrentSuite());
+        }
     }
 
     /**
@@ -126,12 +130,21 @@ class SuiteRunner
     }
 
     /**
+     * @return NotificationSender
+     * @throws \Exception
+     */
+    protected function getNotificationSender()
+    {
+        return $this->getDi()->get('notification_sender');
+    }
+
+    /**
      * @return Logger
      * @throws \Exception
      */
     protected function getLogger()
     {
-        return $this->di->get('logger_helper')->getLogger();
+        return $this->getDi()->get('logger_helper')->getLogger();
     }
 
     /**
@@ -140,7 +153,7 @@ class SuiteRunner
      */
     protected function getJobEntitySaver()
     {
-        return $this->di->get('job_entity_saver');
+        return $this->getDi()->get('job_entity_saver');
     }
 
     /**

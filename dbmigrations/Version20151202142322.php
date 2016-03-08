@@ -16,10 +16,10 @@ class Version20151202142322 extends AbstractMigration
     public function up(Schema $schema)
     {
         $this->addSql(
-            'CREATE TABLE IF NOT EXISTS `notification` (
+            'CREATE TABLE IF NOT EXISTS `notification_type` (
                 `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `type` VARCHAR(255) NOT NULL,
-                `data` VARCHAR(255) NOT NULL,
+                `data` TEXT DEFAULT NULL,
                 PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;'
         );
@@ -50,7 +50,7 @@ class Version20151202142322 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        $this->addSql('DROP TABLE notification');
+        $this->addSql('DROP TABLE notification_type');
         $this->addSql('DROP TABLE build');
         $this->addSql('DROP TABLE job');
     }

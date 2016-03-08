@@ -43,4 +43,14 @@ class JobEntity extends EntityAbstract
         $this->buildEntity = $buildEntity;
         $this->build_id = $buildEntity->id;
     }
+
+    /**
+     * @return int
+     */
+    public function getDuration()
+    {
+        $date1 = new \DateTime($this->started_date);
+        $date2 = new \DateTime($this->completed_date);
+        return $date2->getTimestamp() - $date1->getTimestamp();
+    }
 }

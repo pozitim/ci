@@ -16,7 +16,8 @@ $configs = array(
     'req_id' => uniqid('REQ-' . gethostname()),
     'php_bin' => '/usr/bin/php',
     'docker_bin' => '/usr/local/bin/docker',
-    'docker_compose_bin' => '/usr/local/bin/docker-compose'
+    'docker_compose_bin' => '/usr/local/bin/docker-compose',
+    'host_url' => 'http://192.168.99.100'
 );
 
 /**
@@ -43,11 +44,5 @@ $configs['logger']['default_level'] = \Monolog\Logger::DEBUG;
  * $configs['logger']['app']['level'] = \Monolog\Logger::DEBUG;
  * $di->getLogger('app')->info('foo bar');
  */
-
-/**
- * HipChat
- */
-$configs['hipchat'] = array();
-$configs['hipchat']['access_token'] = '';
 
 return $configs;

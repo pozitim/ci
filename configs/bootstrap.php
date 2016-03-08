@@ -58,6 +58,10 @@ $di->setShared('job_entity_fetcher', function (\OU\DI $di) {
     return new \Pozitim\CI\Database\MySQL\JobEntityFetcherImpl($di);
 });
 
+$di->setShared('notification_type_entity_fetcher', function (\OU\DI $di) {
+    return new \Pozitim\CI\Database\MySQL\NotificationTypeEntityFetcherImpl($di);
+});
+
 $di->setShared('temporary_folder_setup_helper', function (\OU\DI $di) {
     return new \Pozitim\CI\Docker\Compose\TemporaryFolderSetupHelper($di->get('config')->tmp_path);
 });
@@ -79,6 +83,10 @@ $di->setShared('router', function (\OU\DI $di) {
 
 $di->setShared('dispatcher', function (\OU\DI $di) {
     return new \Pozitim\CI\Web\Dispatcher($di);
+});
+
+$di->setShared('notification_sender', function (\OU\DI $di) {
+    return new \Pozitim\CI\Notification\NotificationSender($di);
 });
 
 return $di;

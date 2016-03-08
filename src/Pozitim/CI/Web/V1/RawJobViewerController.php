@@ -34,7 +34,7 @@ class RawJobViewerController extends BaseController
          * @var JobEntityFetcher $jobEntityFetcher
          */
         $jobEntityFetcher = $this->getDi()->get('job_entity_fetcher');
-        $jobEntity = $jobEntityFetcher->fetchOneObjectById($this->getHttpRequest()->get('job_id'));
+        $jobEntity = $jobEntityFetcher->fetchOneObjectById($this->getHttpRequest()->get('id'));
         $this->sendPlainText($jobEntity->output);
     }
 }
